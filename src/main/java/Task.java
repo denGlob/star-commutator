@@ -18,6 +18,10 @@ public class Task {
         this.id = id;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public List<Task> getParentTasks() {
         return parentTasks;
     }
@@ -54,6 +58,10 @@ public class Task {
         return executionTime;
     }
 
+    public int getStartTime() {
+        return startTime;
+    }
+
     public void setExecutionTime(int executionTime) {
         this.executionTime = executionTime;
     }
@@ -83,6 +91,23 @@ public class Task {
     public void addParent(Task task) {
         parentTasks.add(task);
         int pos = task.getChildTasks().indexOf(this);
-        updateStartTime(task.executionTime + task.branches.get(pos));
+        updateStartTime(task.executionTime + task.getStartTime() + task.branches.get(pos));
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "\t\nid='" + id + '\'' +
+                "\n-------------------------------------" +
+//                ",\t\n parentTasks=" + parentTasks+
+                "\n-------------------------------------" +
+//                ",\t\n childTasks=" + childTasks +
+                "\n-------------------------------------" +
+                ",\t\n done=" + done +
+                ",\t\n free=" + free +
+                ",\t\n executionTime=" + executionTime +
+                ",\t\n startTime=" + startTime +
+                ",\t\n branches=" + branches.toString() +
+                '}';
     }
 }
